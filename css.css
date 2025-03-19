@@ -1,0 +1,315 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*user-select: none;*/
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    /*touch-action: manipulation; /* 优化触控响应 */
+    -webkit-text-size-adjust: 100%; /* 禁止字体自动缩放 */
+  }
+
+  img, svg {
+    max-width: 100%; /* 媒体元素自适应 */
+    height: auto;
+  }
+  .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+.icon img {
+  margin-bottom: 0px;
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 100vh; 
+    line-height: 1.6;
+    min-width: 320px; /* 兼容小屏设备 */
+    overflow-x: hidden; /* 防止横向溢出 */
+    font-size: clamp(16px, 4vw, 24px); 
+
+}
+
+/* 修改1：通过计算高度占满空间 */
+main {
+    padding: 10px;
+    height: calc(87vh); 
+    width: 100vw; /* 新增 *//* 120px=header(40px)+footer(80px)预估值 */
+    flex: 1;
+}
+
+/* 修改2：弹性容器设置 */
+main ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 修改3：弹性项撑满 */
+main ul li {
+    flex: 1;
+    min-height: 60px;
+    display: flex;
+    font-size: 18px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+   /* font-size: clamp(16px, 4vw, 24px);*/ 
+	font-weight: bolder;
+}
+main ul li.sec {
+  flex: 1;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+  border-bottom: none;
+  padding: 20px 0;
+  font-size: clamp(18px, 4vw, 24px);
+}
+
+/* 保持你原有的特殊样式 */
+.fir {
+    border-top: none;
+    border-bottom: none;
+    position: relative;
+    top: 23px;
+}
+
+ul h1 {
+    font-size: 20px;
+    position: relative;
+    right: 30px;
+    bottom: 30px;
+}
+
+ul span {
+    color: green;
+    font-size: 18px;
+    font-weight: bolder;
+    position: relative;
+    left: 60px;
+}
+ul p {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bolder;
+    position: relative;
+    right: 47px;
+    bottom: 35px;
+}
+
+/* 修复高度计算 */
+#moduleContainer {
+    height: 100vh; /* 覆盖原有设置 */
+    overflow-y: auto; /* 允许垂直滚动 */
+    -webkit-overflow-scrolling: touch; /* iOS滚动优化[3](@ref) */
+  }
+  
+  [data-module] {
+    min-height: 100%; /* 确保模块撑满容器 */
+    position: relative; /* 替代absolute避免脱离文档流 */
+    transform: none !important; /* 临时禁用动画定位 */
+  }
+
+@keyframes clickPulse {
+  0% { transform: scale(1); }
+  25% { transform: scale(0.92); }
+  50% { transform: scale(0.98); }
+  75% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* 保持原有悬停效果 */
+
+
+footer .icon img:hover {
+  transform: scale(1.1);
+}
+
+
+/* 保持footer原有样式 */
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color:white;
+  padding: 10px 0;
+  bottom: 0;
+  width: 100%;
+  flex: 0 0 auto;
+  height:calc(13vh);
+border-top: 3px solid seagreen;	
+}
+footer a{
+text-decoration: none;
+color: #008000;
+}
+
+
+footer .icon img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%; /* 可选：圆形图标 */
+  transition: transform 0.3s; 
+  cursor: pointer; /* 添加手型光标 */
+}
+
+footer .icon img:active {
+  animation: clickPulse 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+footer .icon  {
+  font-size: 5px;
+  font-weight: bolder;
+  position: relative;
+  left: -5px;
+}
+
+footer .icon p{
+  font-size: 10px;
+  position: relative;
+  top: -5px;
+}
+
+footer #four {
+  position: relative;
+  top: -3px;
+  width: 60px;
+  height: 60px;
+}
+
+footer #zhandian {
+  size: 50px;
+  position: relative;
+  top: -5px;
+}
+
+footer #huanduan {
+  position: relative;
+  top: -5px;
+}
+
+footer #my {
+  position: relative;
+  top: -18px;
+  width: 50px;
+  height: 50px;
+}
+
+footer .center-icon:hover img {
+  transform: scale(1.1);
+}
+
+/* 新增样式 */
+.page-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 13vh);
+    overflow: hidden;
+    perspective: 1000px; /* 新增3D透视 */
+  }
+  
+  .page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更平滑的动画曲线 */
+    backface-visibility: hidden; /* 防止闪动 */
+    transform-style: preserve-3d; /* 启用硬件加速 */
+  -webkit-overflow-scrolling: touch; /* iOS Safari优化 */
+  }
+  
+  [v-cloak] {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .page:not(.active) {
+    visibility: hidden; /* 初始隐藏 */
+    opacity: 0; /* 添加透明度过渡 */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.15s ease; /* 新增透明度过渡 */
+  }
+  .page::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #ccc;
+    border-radius: 50%;
+    border-top-color: seagreen;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+  
+  .page.loading::after {
+    display: block;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+/* 修改激活状态样式 */
+footer .icon.active {
+  transform: translateY(-8px);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* 移除边框效果 */
+footer .icon.active img {
+  border: none !important;
+}
+
+/* 添加平滑过渡 */
+footer .icon {
+  transition: transform 0.3s ease;
+}
+
+footer .icon img {
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+/* 新增页面特殊效果 */
+.page[data-page="add"] {
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: seagreen;
+  animation: gentleAppear 0.4s ease-out;
+}
+
+@keyframes gentleAppear {
+  from {
+      opacity: 0.9;
+      transform: scale(0.98);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
