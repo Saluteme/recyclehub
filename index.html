@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+    content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="/recyclehub/css.css">
+    <link rel="stylesheet" href="/css.css">
+    <title>回收站页面</title>
+</head>
+
+<body class="loading"> 
+    
+    <div class="page-container">
+        <main class="page active" data-page="home">
+        <ul>
+            <li class="fir">
+                <div class="gao"><h1>XX路XX回收站 1 <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+            <li ><div class="gai"><h1>XX路XX回收站 2   <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+            <li ><div class="gai"><h1>XX路XX回收站 3   <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+            <li ><div class="gai"><h1>XX路XX回收站 4   <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+            <li ><div class="gai"><h1>XX路XX回收站 5   <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+            <li ><div class="gai"><h1>XX路XX回收站 6   <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+            <li ><div class="gai"><h1>XX路XX回收站 7   <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+            <li class="sec"><div class="gai"><h1>XX路XX回收站 8   <span>(价格信息)</span></h1>
+                <p>该站价格高于您附近回收站同比X%</p></div>
+            </li>
+        </ul>
+        </main>
+        <!-- 虫订单模块内容 -->
+        <div class="page" data-page="order">
+            <div class="order-container">
+                <a href="javascript:void(0)" class="order-item" data-target="energy">
+                    <div class="order-content">
+                        <span class="order-title"><span class="green-bracket">【能量】</span>XX高端小区求速收（悬赏）</span>
+                        <span class="order-tag official">（<span class="parenthesis-content">废品信息</span>）</span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" class="order-item" data-target="price">
+                    <div class="order-content">
+                        <span class="order-title"><span class="green-bracket">【价收】</span>XX城中村收废品</span>
+                        <span class="order-tag official">（<span class="parenthesis-content">废品信息</span>）</span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" class="order-item" data-target="recycle">
+                    <div class="order-content">
+                        <span class="order-title"><span class="green-bracket">【回收】</span>XX路回收站高价收</span>
+                        <span class="order-tag official">（<span class="parenthesis-content">废品信息</span>）</span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" class="order-item" data-target="official">
+                    <div class="order-content">
+                        <span class="order-title"><span class="green-bracket">【能量任务】</span>回收满X斤废品即可获得X能量</span>
+                        <span class="order-tag official1">（官方）</span>
+                    </div>
+                </a>
+
+                <!-- 新增六个空白格子 -->
+                <div class="order-item blank"></div>
+                <div class="order-item blank"></div>
+                <div class="order-item blank"></div>
+                <div class="order-item blank"></div>
+                <div class="order-item blank"></div>
+                <div class="order-item blank">
+                    <div class="order-content">
+                        （只有青虫认证的回收员才可接悬赏，以及回收双方都获得虫能量，但必须回收至青虫认证的回收站）
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page" data-page="add">添加模块内容</div>
+        <div class="page" data-page="switch">换端模块内容</div>
+        <div class="page" data-page="user">我的模块内容</div>
+
+        <div class="page" data-page="energy">
+            <button class="back-button" onclick="pageSwitcher.backToOrder()">← 返回订单</button>
+            <div class="editable-content">
+                <h2>能量任务详情</h2>
+            </div>
+        </div>
+
+        <div class="page" data-page="price">
+            <button class="back-button" onclick="pageSwitcher.backToOrder()">← 返回订单</button>
+            <div class="editable-content">
+                <h2>价格回收详情</h2>
+            </div>
+        </div>
+
+        <div class="page" data-page="recycle">
+            <button class="back-button" onclick="pageSwitcher.backToOrder()">← 返回订单</button>
+            <div class="editable-content">
+                <h2>回收站详情</h2>
+            </div>
+        </div>
+
+        <div class="page" data-page="official">
+            <button class="back-button" onclick="pageSwitcher.backToOrder()">← 返回订单</button>
+            <div class="editable-content">
+                <h2>官方任务详情</h2>
+            </div>
+        </div>    
+    </div>
+    
+    <footer class="icon-container">
+        <a href="#" class="icon" id="zhandian"><img src="/recyclehub/images/chongzhandian2.png" alt="站点"><p>虫站点</p></a>
+        <a href="#" class="icon" id="zhandian"><img src="/recyclehub/images/chongdingdan2.png" alt="订单"><p>虫订单</p></a>
+        <a href="#" class="icon" id="four" ><img src="/recyclehub/images/jiahao3.png" alt="添加"></a>
+        <a href="#" class="icon" id="huanduan" ><img src="/recyclehub/images/chonghuanduan2.png" alt="换端"><p>虫换端</p></a>
+        <a href="#" class="icon" id="my"><img src="/recyclehub/images/wode2.png" alt="我的"><p>我的</p></a>
+    </footer>
+    <script src="/recyclehub/js.js"></script>
+    <script src="/js.js"></script>
+</body>
+</html>
+    
