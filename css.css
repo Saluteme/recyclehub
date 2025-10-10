@@ -107,7 +107,9 @@ main.page[data-page="home"] ul li:first-child {
   border-top: none;
   padding-top: 18px; /* 第一个格子顶部间距稍大 */
 }
-
+main.page[data-page="home"] {
+  padding: 5px 10px; /* 减少顶部内边距 */
+}
 main.page[data-page="home"] ul li:last-child {
   border-bottom: none;
   padding-bottom: 18px; /* 最后一个格子底部间距稍大 */
@@ -116,7 +118,7 @@ main.page[data-page="home"] ul li:last-child {
 /* 统一调整.gai和.gao的定位 */
 .gai{
   position: relative;
-  top: 30px;
+  top: 40px;
   left: 9px;
 }
 
