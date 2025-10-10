@@ -110,7 +110,7 @@ main.page[data-page="home"] ul li:first-child {
 main.page[data-page="home"] {
   padding: 0px 10px; /* 完全移除顶部内边距 */
   position: relative;
-  top: -20px; /* 整个容器向上移动 */
+  top: -25px; /* 整个容器向上移动 */
 }
 main.page[data-page="home"] ul li:last-child {
   border-bottom: none;
