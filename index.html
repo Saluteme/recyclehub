@@ -9,39 +9,74 @@
     <link rel="stylesheet" href="/css.css">
     <title>回收站页面</title>
 </head>
-
+                
 <body class="loading"> 
     
     <div class="page-container">
         <main class="page active" data-page="home">
         <ul>
-            <li class="fir">
-                <div class="gao"><h1>XX路XX回收站 1 <span>(价格信息)</span></h1>
-                <p>该站价格高于您附近回收站同比X%</p></div>
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
+                <li class="fir">
+                    <div class="gao"><h1>XX路XX回收站 1 <span>(价格信息)</span></h1>
+                    <p>该站价格高于您附近回收站同比X%</p>
+                    </div>
+                </li>
+            </a>
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
+                <li ><div class="gai"><h1>XX路XX回收站 2   <span>(价格信息)</span></h1>
+                    <p>该站价格高于您附近回收站同比X%</p></div>
+                </li>
+            </a>
+            
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
+                <li class="fir">
+                    <div class="gao"><h1>XX路XX回收站 3 <span>(价格信息)</span></h1>
+                    <p>该站价格高于您附近回收站同比X%</p>
+                    </div>
+                </li>
+            </a>
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
+                <li ><div class="gai"><h1>XX路XX回收站 4   <span>(价格信息)</span></h1>
+                    <p>该站价格高于您附近回收站同比X%</p></div>
+                </li>
+            </a>
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
+                <li class="fir">
+                    <div class="gao"><h1>XX路XX回收站 5 <span>(价格信息)</span></h1>
+                    <p>该站价格高于您附近回收站同比X%</p>
+                    </div>
+                </li>
+            </a>
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
+                <li ><div class="gai"><h1>XX路XX回收站 6   <span>(价格信息)</span></h1>
+                    <p>该站价格高于您附近回收站同比X%</p></div>
+                </li>
+            </a>
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
+                <li class="fir">
+                    <div class="gao"><h1>XX路XX回收站 7 <span>(价格信息)</span></h1>
+                    <p>该站价格高于您附近回收站同比X%</p>
+                    </div>
+                </li>
+            </a>
             </li>
-            <li ><div class="gai"><h1>XX路XX回收站 2   <span>(价格信息)</span></h1>
-                <p>该站价格高于您附近回收站同比X%</p></div>
-            </li>
-            <li ><div class="gai"><h1>XX路XX回收站 3   <span>(价格信息)</span></h1>
-                <p>该站价格高于您附近回收站同比X%</p></div>
-            </li>
-            <li ><div class="gai"><h1>XX路XX回收站 4   <span>(价格信息)</span></h1>
-                <p>该站价格高于您附近回收站同比X%</p></div>
-            </li>
-            <li ><div class="gai"><h1>XX路XX回收站 5   <span>(价格信息)</span></h1>
-                <p>该站价格高于您附近回收站同比X%</p></div>
-            </li>
-            <li ><div class="gai"><h1>XX路XX回收站 6   <span>(价格信息)</span></h1>
-                <p>该站价格高于您附近回收站同比X%</p></div>
-            </li>
-            <li ><div class="gai"><h1>XX路XX回收站 7   <span>(价格信息)</span></h1>
-                <p>该站价格高于您附近回收站同比X%</p></div>
-            </li>
+            
+            <a href="javascript:void(0)" class="orderfix" data-target="info">
             <li class="sec"><div class="gai"><h1>XX路XX回收站 8   <span>(价格信息)</span></h1>
                 <p>该站价格高于您附近回收站同比X%</p></div>
             </li>
+            </a>
         </ul>
         </main>
+
+        <div class="page" data-page="info">
+            <button class="back-button" onclick="pageSwitcher.backToHome()">← 返回站点</button>
+            <div class="editable-content">
+                <h2>价格信息详情</h2>
+                <p>这是价格信息详情页面</p>
+            </div>
+        </div>
+
         <!-- 虫订单模块内容 -->
         <div class="page" data-page="order">
             <div class="order-container">
@@ -84,6 +119,8 @@
             </div>
         </div>
         
+        
+
         <div class="page" data-page="add">添加模块内容</div>
         <div class="page" data-page="switch">换端模块内容</div>
         <div class="page" data-page="user">我的模块内容</div>
@@ -121,8 +158,8 @@
         <a href="#" class="icon" id="zhandian"><img src="./images/chongzhandian2.png" alt="站点"><p>虫站点</p></a>
         <a href="#" class="icon" id="zhandian"><img src="./images/chongdingdan2.png" alt="订单"><p>虫订单</p></a>
         <a href="#" class="icon" id="four" ><img src="./images/jiahao3.png" alt="添加"></a>
-        <a href="#" class="icon" id="huanduan" ><img src="./images/chonghuanduan2.png" alt="换端"><p>虫换端</p></a>
-        <a href="#" class="icon" id="my"><img src="./images/wode2.png" alt="我的"><p>我的</p></a>
+        <a href="#" class="icon" id="huanduan" ><img src=".images/chonghuanduan2.png" alt="换端"><p>虫换端</p></a>
+        <a href="#" class="icon" id="my"><img src=".images/wode2.png" alt="我的"><p>我的</p></a>
     </footer>
     <script src="/recyclehub/js.js"></script>
     <script src="/js.js"></script>
