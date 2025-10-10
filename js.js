@@ -1,31 +1,30 @@
 class PageSwitcher {
     constructor() {
-        // 获取所有页面元素
         this.pages = Array.from(document.querySelectorAll('.page'));
-        // 获取底部导航图标
         this.footerIcons = document.querySelectorAll('footer .icon');
-        // 当前活动页面索引
         this.currentIndex = 0;
-        // 触摸起始坐标
         this.startX = 0;
-        // 动画状态锁
         this.isAnimating = false;
-        // 主页面列表
+        
+        // 明确定义主页面顺序
         this.mainPages = ['home', 'order', 'add', 'switch', 'user'];
         // 子页面列表
-        this.subPages = ['energy', 'price', 'recycle', 'official'];
+        this.subPages = ['energy', 'price', 'recycle', 'official', 'info'];
+        
+        // 创建页面映射，便于快速查找
+        this.pageMap = {};
+        this.pages.forEach(page => {
+            this.pageMap[page.dataset.page] = page;
+        });
 
-        // 初始化操作
         this.init();
         this.isInitialized = false;
-        
     }
 
     init() {
         this.disableTransitions();
         this.initPagesPosition();
 
-        // 初始化完成后移除 loading 类
         window.addEventListener('load', () => {
             document.body.classList.remove('loading');
             this.enableTransitions();
@@ -38,7 +37,6 @@ class PageSwitcher {
     }
 
     disableTransitions() {
-        // 禁用过渡效果用于初始化
         this.pages.forEach(page => {
             page.style.transition = 'none';
         });
@@ -51,14 +49,18 @@ class PageSwitcher {
     }
 
     initPagesPosition() {
-        this.pages.forEach((page, index) => {
+        this.pages.forEach(page => {
             page.style.willChange = 'transform, opacity';
-            if (page.dataset.page === 'home') {
+            const pageName = page.dataset.page;
+            
+            if (pageName === 'home') {
+                // 只有主页初始显示
                 page.style.transform = 'translateX(0)';
                 page.style.opacity = '1';
                 page.style.pointerEvents = 'auto';
                 page.classList.add('active');
             } else {
+                // 其他所有页面都隐藏
                 page.style.transform = 'translateX(100%)';
                 page.style.opacity = '0';
                 page.style.pointerEvents = 'none';
@@ -68,9 +70,8 @@ class PageSwitcher {
     }
 
     initSubPages() {
-        // 初始化子页面：添加返回按钮和默认内容
         this.subPages.forEach(pageName => {
-            const page = this.pages.find(p => p.dataset.page === pageName);
+            const page = this.pageMap[pageName];
             if (page) {
                 // 清除旧按钮防止重复
                 const existingBtn = page.querySelector('.back-button');
@@ -79,13 +80,21 @@ class PageSwitcher {
                 // 创建返回按钮
                 const backBtn = document.createElement('button');
                 backBtn.className = 'back-button';
-                backBtn.textContent = '← 返回订单';
-                backBtn.addEventListener('click', () => this.backToOrder());
+                
+                // 根据页面类型设置不同的返回文本
+                if (pageName === 'info') {
+                    backBtn.textContent = '← 返回站点';
+                    backBtn.addEventListener('click', () => this.backFromSubPage('home'));
+                } else {
+                    backBtn.textContent = '← 返回订单';
+                    backBtn.addEventListener('click', () => this.backFromSubPage('order'));
+                }
+                
                 page.insertAdjacentElement('afterbegin', backBtn);
 
                 // 初始化可编辑内容
                 const content = page.querySelector('.editable-content');
-                if (!content.innerHTML.trim()) {
+                if (content && !content.innerHTML.trim()) {
                     content.innerHTML = `
                         <h2>${this.getPageTitle(pageName)}详情</h2>
                         <p>${this.getDefaultContent(pageName)}</p>
@@ -96,7 +105,7 @@ class PageSwitcher {
     }
 
     initEvents() {
-        // 触摸事件处理
+        // 触摸事件
         document.addEventListener('touchstart', e => {
             if (!this.isAnimating) this.startX = e.touches[0].clientX;
         }, { passive: true });
@@ -108,11 +117,10 @@ class PageSwitcher {
             const deltaX = endX - this.startX;
             const threshold = 50;
 
-            // 滑动超过阈值触发页面切换
             if (Math.abs(deltaX) > threshold) {
                 const direction = deltaX > 0 ? 'right' : 'left';
                 const newIndex = direction === 'right'
-                   ? Math.max(0, this.currentIndex - 1)
+                    ? Math.max(0, this.currentIndex - 1)
                     : Math.min(this.mainPages.length - 1, this.currentIndex + 1);
 
                 this.switchMainPage(newIndex, direction);
@@ -130,7 +138,21 @@ class PageSwitcher {
             });
         });
 
-        // 订单项点击事件（使用事件委托）
+        // 虫站点页面点击事件
+        const homePage = this.pageMap['home'];
+        if (homePage) {
+            homePage.addEventListener('click', e => {
+                const link = e.target.closest('a.orderfix');
+                if (!link) return;
+
+                const targetPage = link.dataset.target;
+                if (targetPage) {
+                    this.switchToSubPage(targetPage);
+                }
+            });
+        }
+
+        // 订单项点击事件
         const orderContainer = document.querySelector('.order-container');
         if (orderContainer) {
             orderContainer.addEventListener('click', e => {
@@ -147,105 +169,130 @@ class PageSwitcher {
 
     switchMainPage(newIndex, direction) {
         if (this.isAnimating || newIndex === this.currentIndex) return;
-      
+        
+        const currentPageName = this.mainPages[this.currentIndex];
+        const newPageName = this.mainPages[newIndex];
+        
+        const currentPage = this.pageMap[currentPageName];
+        const newPage = this.pageMap[newPageName];
+        
+        if (!currentPage || !newPage) return;
+
         this.isAnimating = true;
-        const currentPage = this.pages[this.currentIndex];
-        const newPage = this.pages[newIndex];
-      
+
+        // 设置新页面初始位置
         newPage.style.transform = direction === 'left' 
             ? 'translateX(100%)' 
             : 'translateX(-100%)';
         newPage.style.opacity = '1';
         newPage.style.pointerEvents = 'auto';
-      
+        newPage.classList.add('active');
+
         requestAnimationFrame(() => {
+            // 动画当前页面移出
             currentPage.style.transform = direction === 'left' 
                 ? 'translateX(-100%)' 
                 : 'translateX(100%)';
             currentPage.style.opacity = '0';
-      
+
+            // 动画新页面进入
             newPage.style.transform = 'translateX(0)';
-      
+
             setTimeout(() => {
                 currentPage.classList.remove('active');
-                newPage.classList.add('active');
                 this.currentIndex = newIndex;
                 this.isAnimating = false;
                 this.updateFooter();
             }, 400);
         });
-      }
+    }
 
-      switchToSubPage(pageName) {
-        const targetPage = this.pages.find(p => p.dataset.page === pageName);
+    switchToSubPage(pageName) {
+        const targetPage = this.pageMap[pageName];
         if (!targetPage || this.isAnimating) return;
-      
+
         this.isAnimating = true;
+        
+        // 隐藏当前主页面
+        const currentPageName = this.mainPages[this.currentIndex];
+        const currentPage = this.pageMap[currentPageName];
+        if (currentPage) {
+            currentPage.style.opacity = '0.5';
+        }
+
+        // 显示子页面
         targetPage.style.transform = 'translateX(0)';
         targetPage.style.opacity = '1';
         targetPage.style.pointerEvents = 'auto';
         targetPage.classList.add('sub-active');
-      
-        setTimeout(() => this.isAnimating = false, 400);
-      }
 
-      backToOrder() {
+        setTimeout(() => this.isAnimating = false, 400);
+    }
+
+    backFromSubPage(returnToPage) {
         const currentSubPage = document.querySelector('.page.sub-active');
         if (!currentSubPage || this.isAnimating) return;
-      
+
         this.isAnimating = true;
+
+        // 隐藏子页面
         currentSubPage.style.transform = 'translateX(100%)';
         currentSubPage.style.opacity = '0';
         currentSubPage.style.pointerEvents = 'none';
         currentSubPage.classList.remove('sub-active');
-      
-        const orderPage = this.pages[this.mainPages.indexOf('order')];
-        orderPage.style.transform = 'translateX(0)';
-        orderPage.style.opacity = '1';
-      
+
+        // 显示返回的主页面
+        const returnPage = this.pageMap[returnToPage];
+        if (returnPage) {
+            returnPage.style.opacity = '1';
+            
+            // 如果是返回订单页面，需要更新当前索引
+            if (returnToPage === 'order') {
+                this.currentIndex = this.mainPages.indexOf('order');
+            } else if (returnToPage === 'home') {
+                this.currentIndex = this.mainPages.indexOf('home');
+            }
+        }
+
         setTimeout(() => {
-            this.currentIndex = this.mainPages.indexOf('order');
             this.isAnimating = false;
             this.updateFooter();
         }, 400);
-      }
+    }
 
     updateFooter() {
-        // 更新底部导航状态
         this.footerIcons.forEach((icon, index) => {
             const isActive = index === this.currentIndex;
             icon.classList.toggle('active', isActive);
             const img = icon.querySelector('img');
-            if (img) img.style.transform = isActive ? 'scale(1.1)' : '';
-        });
-    }
-
-    resetMainPages() {
-        // 重置非活动主页面位置
-        this.pages.forEach((page, index) => {
-            if (index !== this.currentIndex && this.mainPages.includes(page.dataset.page)) {
-                page.style.transform = index > this.currentIndex
-                   ? 'translateX(100%)'
-                    : 'translateX(-100%)';
-                page.style.opacity = 0;
-                page.style.visibility = 'hidden';
+            if (img) {
+                img.style.transform = isActive ? 'scale(1.1)' : '';
             }
         });
     }
 
-    // 辅助方法
     getPageTitle(pageName) {
         const titles = {
             energy: '能量任务',
             price: '价格回收',
             recycle: '回收站',
-            official: '官方任务'
+            official: '官方任务',
+            info: '价格信息'
         };
         return titles[pageName] || '详情';
     }
 
     getDefaultContent(pageName) {
         return `这是${this.getPageTitle(pageName)}的默认内容，点击此处开始编辑...`;
+    }
+
+    // 保持向后兼容的方法
+    backToHome() {
+        this.backFromSubPage('home');
+    }
+
+    backToOrder() {
+        this.backFromSubPage('order');
     }
 }
 
