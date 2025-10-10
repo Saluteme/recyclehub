@@ -84,17 +84,42 @@ font-size: clamp(18px, 4vw, 24px);
 }
 
 /* 保持你原有的特殊样式 */
-.fir {
-  border-top: none;
-  border-bottom: none;
+/* 统一所有格子的边框和高度 */
+main.page[data-page="home"] ul li {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   position: relative;
-  top: 23px;
+  padding: 12px 0;
 }
+
+/* 移除.fir的特殊边框设置 */
+.fir {
+  /* border-top: 1px solid #ccc !important; */
+  border-bottom: 1px solid #ccc !important;
+  top: 0px; /* 减少位移 */
+}
+/* .spec{
+  position: relative;
+  top: -10px;
+} */
+/* 只对第一个和最后一个格子做特殊处理 */
+main.page[data-page="home"] ul li:first-child {
+  border-top: none;
+  padding-top: 18px; /* 第一个格子顶部间距稍大 */
+}
+
+main.page[data-page="home"] ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 18px; /* 最后一个格子底部间距稍大 */
+}
+
+/* 统一调整.gai和.gao的定位 */
 .gai{
   position: relative;
-  top: 35px;
+  top: 30px;
   left: 9px;
 }
+
 .gai span{
 position: relative;
 left: 49px;
@@ -103,19 +128,7 @@ left: 49px;
 position: relative;
 left: -29px;
 }
-.gao{
-  position: relative;
-  top: 9px;
-  left: 8.5px;
-}
-.gao span{
-position: relative;
-left: 49px;  
-}
-.gao p{
-position: relative;
-left: -29px;  
-}
+
 ul h1 {
   font-size: 20px;
   position: relative;
@@ -548,3 +561,4 @@ transform: scale(0.98);
   pointer-events: auto !important;
   z-index: 1000 !important;
 }
+
