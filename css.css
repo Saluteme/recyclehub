@@ -108,7 +108,7 @@ main.page[data-page="home"] ul li:first-child {
   padding-top: 18px; /* 第一个格子顶部间距稍大 */
 }
 main.page[data-page="home"] {
-  padding: 5px 10px; /* 减少顶部内边距 */
+  padding: 0px 10px 5px 10px; /* 顶部内边距设为0 */
 }
 main.page[data-page="home"] ul li:last-child {
   border-bottom: none;
