@@ -16,45 +16,46 @@
         <main class="page active" data-page="home">
         <ul>
             <a href="javascript:void(0)" class="orderfix" data-target="info">
-                <li class="fir">
-                    <div class="gao"><h1>XX路XX回收站 1 <span>(价格信息)</span></h1>
+                <li class="fir" class="spec">
+                    <div class="gai"><h1>XX路XX回收站 1 <span>(价格信息)</span></h1>
                     <p>该站价格高于您附近回收站同比X%</p>
                     </div>
                 </li>
             </a>
             <a href="javascript:void(0)" class="orderfix" data-target="info">
-                <li ><div class="gai"><h1>XX路XX回收站 2   <span>(价格信息)</span></h1>
+                <li class="fir" >
+                    <div class="gai"><h1>XX路XX回收站 2   <span>(价格信息)</span></h1>
                     <p>该站价格高于您附近回收站同比X%</p></div>
                 </li>
             </a>
             
             <a href="javascript:void(0)" class="orderfix" data-target="info">
                 <li class="fir">
-                    <div class="gao"><h1>XX路XX回收站 3 <span>(价格信息)</span></h1>
+                    <div class="gai"><h1>XX路XX回收站 3 <span>(价格信息)</span></h1>
                     <p>该站价格高于您附近回收站同比X%</p>
                     </div>
                 </li>
             </a>
             <a href="javascript:void(0)" class="orderfix" data-target="info">
-                <li ><div class="gai"><h1>XX路XX回收站 4   <span>(价格信息)</span></h1>
+                <li class="fir"><div class="gai"><h1>XX路XX回收站 4   <span>(价格信息)</span></h1>
                     <p>该站价格高于您附近回收站同比X%</p></div>
                 </li>
             </a>
             <a href="javascript:void(0)" class="orderfix" data-target="info">
                 <li class="fir">
-                    <div class="gao"><h1>XX路XX回收站 5 <span>(价格信息)</span></h1>
+                    <div class="gai"><h1>XX路XX回收站 5 <span>(价格信息)</span></h1>
                     <p>该站价格高于您附近回收站同比X%</p>
                     </div>
                 </li>
             </a>
             <a href="javascript:void(0)" class="orderfix" data-target="info">
-                <li ><div class="gai"><h1>XX路XX回收站 6   <span>(价格信息)</span></h1>
+                <li class="fir"><div class="gai"><h1>XX路XX回收站 6   <span>(价格信息)</span></h1>
                     <p>该站价格高于您附近回收站同比X%</p></div>
                 </li>
             </a>
             <a href="javascript:void(0)" class="orderfix" data-target="info">
                 <li class="fir">
-                    <div class="gao"><h1>XX路XX回收站 7 <span>(价格信息)</span></h1>
+                    <div class="gai"><h1>XX路XX回收站 7 <span>(价格信息)</span></h1>
                     <p>该站价格高于您附近回收站同比X%</p>
                     </div>
                 </li>
@@ -122,8 +123,147 @@
         
 
         <div class="page" data-page="add">添加模块内容</div>
-        <div class="page" data-page="switch">换端模块内容</div>
+
+
+        <div class="page" data-page="switch">
+            <!-- 切换按钮（制造商端/回收站端） -->
+            <div class="switch-tabs">
+                <button class="tab-button active" data-tab="manufacturer">制造商端</button>
+                <button class="tab-button" data-tab="recycler">回收站端</button>
+            </div>
+
+            <!-- 表单容器 -->
+            <div class="switch-form-container">
+                <!-- 制造商端表单（默认显示） -->
+                <div class="form-tab active" data-tab="manufacturer">
+                <div class="form-row">
+                    <label>回收种类：</label>
+                    <div class="checkbox-group">
+                    <label><input type="checkbox" name="recycle-type"> 废纸</label>
+                    <label><input type="checkbox" name="recycle-type"> 泡沫</label>
+                    <label><input type="checkbox" name="recycle-type"> 塑料</label>
+                    <label><input type="checkbox" name="recycle-type"> 钢材</label>
+                    <label><input type="checkbox" name="recycle-type"> 玻璃</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>车辆类型：</label>
+                    <div class="radio-group">
+                    <label><input type="radio" name="vehicle-type"> 三轴半挂</label>
+                    <label><input type="radio" name="vehicle-type"> 多轴半挂</label>
+                    <label><input type="radio" name="vehicle-type"> 单轴/双轴半挂车</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>预测重量：</label>
+                    <input type="number" class="form-input" placeholder="请输入（公斤）">
+                    <label>回收价格：</label>
+                    <input type="number" step="0.01" class="form-input" placeholder="请输入（元/公斤）">
+                </div>
+
+                <div class="form-row">
+                    <label>装货地：</label>
+                    <input type="text" class="form-input" placeholder="请输入装货地">
+                </div>
+
+                <div class="form-row">
+                    <label>是否承担运输费用：</label>
+                    <div class="radio-group">
+                    <label><input type="radio" name="transport-fee"> 是</label>
+                    <label><input type="radio" name="transport-fee"> 否</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>期望运货时间：</label>
+                    <input type="datetime-local" class="form-input">
+                </div>
+
+                <div class="form-row">
+                    <label>是否接受回收站竞价：</label>
+                    <div class="radio-group">
+                    <label><input type="radio" name="bid-accept"> 是</label>
+                    <label><input type="radio" name="bid-accept"> 否</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>结货方式：</label>
+                    <div class="radio-group">
+                    <label><input type="radio" name="payment"> 货到付款</label>
+                    <label><input type="radio" name="payment"> 商业汇零</label>
+                    <label><input type="radio" name="payment"> 网结</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>是否加急：</label>
+                    <div class="radio-group">
+                    <label><input type="radio" name="urgent"> 是</label>
+                    <label><input type="radio" name="urgent"> 否</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>是否加途径点：</label>
+                    <div class="radio-group">
+                    <label><input type="radio" name="waypoint"> 是</label>
+                    <label><input type="radio" name="waypoint"> 否</label>
+                    </div>
+                </div>
+                </div>
+
+            <!-- 回收站端（后续补充） -->
+            <div class="form-tab" data-tab="recycler">
+                <main data-page="recycler-home"> <!-- 移除.page和.active类 -->
+                    <ul>
+                    <!-- 第一行：自定义文字 -->
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                    <li class="fir spec">
+                        <div class="gai">
+                        <h1>
+                            <span class="left-text">XX地XX制造商</span>
+                            <span class="num">1</span>
+                            <span class="right-text">(需求信息)</span>
+                        </h1>
+                        <p>是/否加急 是/否担运费</p>
+                        </div>
+                    </li>
+                    </a>
+                    <!-- 第二到第八行保持不变 -->
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                        <li class="fir"><div class="gai"><h1>2</h1></div></li>
+                    </a>
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                        <li class="fir"><div class="gai"><h1>3</h1></div></li>
+                    </a>
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                        <li class="fir"><div class="gai"><h1>4</h1></div></li>
+                    </a>
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                        <li class="fir"><div class="gai"><h1>5</h1></div></li>
+                    </a>
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                        <li class="fir"><div class="gai"><h1>6</h1></div></li>
+                    </a>
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                        <li class="fir"><div class="gai"><h1>7</h1></div></li>
+                    </a>
+                    <a href="javascript:void(0)" class="orderfix" data-target="info">
+                        <li class="sec"><div class="gai"><h1>8</h1></div></li>
+                    </a>
+                    </ul>
+                </main>
+            </div>
+
+        </div>
+    </div>
+
+
         <div class="page" data-page="user">我的模块内容</div>
+
 
         <div class="page" data-page="energy">
             <button class="back-button" onclick="pageSwitcher.backToOrder()">← 返回订单</button>
@@ -158,8 +298,8 @@
         <a href="#" class="icon" id="zhandian"><img src="./images/chongzhandian2.png" alt="站点"><p>虫站点</p></a>
         <a href="#" class="icon" id="zhandian"><img src="./images/chongdingdan2.png" alt="订单"><p>虫订单</p></a>
         <a href="#" class="icon" id="four" ><img src="./images/jiahao3.png" alt="添加"></a>
-        <a href="#" class="icon" id="huanduan" ><img src=".images/chonghuanduan2.png" alt="换端"><p>虫换端</p></a>
-        <a href="#" class="icon" id="my"><img src=".images/wode2.png" alt="我的"><p>我的</p></a>
+        <a href="#" class="icon" id="huanduan" ><img src="./images/chonghuanduan2.png" alt="换端"><p>虫换端</p></a>
+        <a href="#" class="icon" id="my"><img src="./images/wode2.png" alt="我的"><p>我的</p></a>
     </footer>
     <script src="/recyclehub/js.js"></script>
     <script src="/js.js"></script>
