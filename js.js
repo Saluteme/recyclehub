@@ -165,6 +165,7 @@ class PageSwitcher {
                 }
             });
         }
+        
     }
 
     switchMainPage(newIndex, direction) {
@@ -304,4 +305,45 @@ document.querySelectorAll('.order-item.blank').forEach(item => {
         e.preventDefault();
         e.stopPropagation();
     });
+});
+
+// 虫换端 - 切换制造商端/回收站端
+document.querySelectorAll('.tab-button').forEach(button => {
+  button.addEventListener('click', () => {
+    // 切换按钮激活状态
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    
+    // 切换对应表单显示
+    const targetTab = button.dataset.tab;
+    document.querySelectorAll('.form-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.tab === targetTab);
+    });
+  });
+});
+
+// 找到虫换端切换的JS代码，确保以下逻辑存在（无需修改，仅验证）
+document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const formTabs = document.querySelectorAll('.form-tab');
+  
+  // 初始化默认显示制造商端
+  tabButtons[0].classList.add('active');
+  formTabs[0].classList.add('active');
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetTab = button.dataset.tab;
+      formTabs.forEach(tab => {
+        if (tab.dataset.tab === targetTab) {
+          tab.classList.add('active');
+          tab.style.display = 'block'; // 强制显示
+          tab.style.height = '100%'; // 强制撑满高度
+        } else {
+          tab.classList.remove('active');
+          tab.style.display = 'none';
+        }
+      });
+    });
+  });
 });
