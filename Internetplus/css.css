@@ -84,17 +84,46 @@ font-size: clamp(18px, 4vw, 24px);
 }
 
 /* 保持你原有的特殊样式 */
-.fir {
-  border-top: none;
-  border-bottom: none;
+/* 统一所有格子的边框和高度 */
+main.page[data-page="home"] ul li {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   position: relative;
-  top: 23px;
+  padding: 12px 0;
 }
+
+/* 移除.fir的特殊边框设置 */
+.fir {
+  /* border-top: 1px solid #ccc !important; */
+  border-bottom: 1px solid #ccc !important;
+  top: 0px; /* 减少位移 */
+}
+/* .spec{
+  position: relative;
+  top: -10px;
+} */
+/* 只对第一个和最后一个格子做特殊处理 */
+main.page[data-page="home"] ul li:first-child {
+  border-top: none;
+  padding-top: 18px; /* 第一个格子顶部间距稍大 */
+}
+main.page[data-page="home"] {
+  padding: 0px 10px; /* 完全移除顶部内边距 */
+  position: relative;
+  top: -30px; /* 整个容器向上移动 */
+}
+main.page[data-page="home"] ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 18px; /* 最后一个格子底部间距稍大 */
+}
+
+/* 统一调整.gai和.gao的定位 */
 .gai{
   position: relative;
-  top: 35px;
+  top: 40px;
   left: 9px;
 }
+
 .gai span{
 position: relative;
 left: 49px;
@@ -103,19 +132,7 @@ left: 49px;
 position: relative;
 left: -29px;
 }
-.gao{
-  position: relative;
-  top: 9px;
-  left: 8.5px;
-}
-.gao span{
-position: relative;
-left: 49px;  
-}
-.gao p{
-position: relative;
-left: -29px;  
-}
+
 ul h1 {
   font-size: 20px;
   position: relative;
@@ -547,4 +564,201 @@ transform: scale(0.98);
   opacity: 1 !important;
   pointer-events: auto !important;
   z-index: 1000 !important;
+}
+
+/* 虫换端 - 切换按钮样式 */
+.page[data-page="switch"] {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: white;
+}
+.switch-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+.tab-button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #333;
+  background: #f0f0f0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.tab-button.active {
+  background: seagreen;
+  color: white;
+}
+
+/* 虫换端 - 表单样式（和现有页面统一） */
+.switch-form-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.form-tab {
+  display: none;
+}
+.form-tab.active {
+  display: block;
+}
+.form-row {
+  padding: 12px 0;
+  border-bottom: 1px solid #4CAF50; /* 和现有页面一致的绿色分隔线 */
+  margin-bottom: 8px;
+  font-weight: bolder;
+  font-size: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.form-row label {
+  min-width: 120px;
+  color: #333;
+}
+.checkbox-group, .radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  flex: 1;
+}
+.checkbox-group label, .radio-group label {
+  min-width: auto;
+  cursor: pointer;
+}
+.form-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 150px;
+}
+
+/* ========== 回收站端样式调整：强制贴近切换按钮 + 居中 + 边框规则 ========== */
+/* 1. 彻底移除顶部间距，让第一行紧贴切换按钮 */
+.form-tab[data-tab="recycler"] main {
+  padding: 0 10px !important; /* 仅保留左右内边距，顶部间距清零 */
+  margin-top: 0 !important;
+  top: 0 !important;
+  height: calc(100% - 5px) !important; /* 进一步压缩高度，减少空隙 */
+}
+.form-tab[data-tab="recycler"] ul {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  gap: 0 !important; /* 去掉列表项之间的默认间距 */
+  margin-bottom: 0 !important;
+}
+/* 减少切换按钮容器的底部间距（如果仍有间隙，添加这行） */
+.switch-tabs {
+  margin-bottom: 5px !important; /* 原20px改为5px，可根据需要调至0 */
+}
+
+/* 2. 强制所有数字/文字居中（保留之前的居中规则） */
+.form-tab[data-tab="recycler"] ul li {
+  display: flex !important;
+  align-items: center !important; /* 垂直居中 */
+  justify-content: center !important; /* 水平居中 */
+  position: static !important; /* 取消所有定位偏移 */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  padding: 0px 0 !important; /* 减少格子内边距，进一步贴近 */
+  min-height: 50px !important; /* 可选：缩小格子高度，更紧凑 */
+}
+.form-tab[data-tab="recycler"] .gai {
+  position: static !important; /* 取消定位偏移 */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  text-align: center !important; /* 文字水平居中 */
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+.form-tab[data-tab="recycler"] .gai h1,
+.form-tab[data-tab="recycler"] .gai span,
+.form-tab[data-tab="recycler"] .gai p {
+  position: static !important; /* 取消所有文字定位偏移 */
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  color: #000;
+  margin: 0 auto !important;
+  text-align: center !important; /* 强制文字居中 */
+  display: inline-block !important; /* 避免文字块错位 */
+}
+.form-tab[data-tab="recycler"] .gai h1 {
+  width: 100% !important; /* 占满父容器，确保居中 */
+}
+
+/* 3. 每个数字上下仅保留一条边框线（保留之前的边框规则） */
+.form-tab[data-tab="recycler"] ul li {
+  border-top: none !important; /* 去掉顶部边框 */
+  border-bottom: 1px solid #ccc !important; /* 仅保留底部边框 */
+}
+.form-tab[data-tab="recycler"] ul li:first-child {
+  border-top: none !important; /* 第一行上方绝对无边框 */
+}
+.form-tab[data-tab="recycler"] ul li.sec {
+  border-bottom: none !important; /* 最后一行去掉底部边框 */
+}
+
+/* 1. 第一行容器：flex 布局拆分左、中、右 */
+.form-tab[data-tab="recycler"] ul li.fir.spec .gai {
+  padding: 0 5px !important; /* 左右留间距，避免贴边 */
+  width: 100% !important;
+}
+.form-tab[data-tab="recycler"] ul li.fir.spec .gai h1 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important; /* 左、中、右分布 */
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #000 !important; /* 基础文字黑色 */
+}
+
+/* 2. 左侧文字：XX地XX制造商（稍靠左，留间距） */
+.form-tab[data-tab="recycler"] ul li.fir.spec .gai h1 span.left-text {
+  text-align: left !important;
+  font-size: large;
+  margin-left: 10px !important; /* 离左边框的间距 */
+  color: #000 !important; /* 黑色 */
+  flex: 1; /* 占左侧空间 */
+}
+
+/* 3. 中间数字：1（居中，与其他行一致） */
+.form-tab[data-tab="recycler"] ul li.fir.spec .gai h1 span.num {
+  width: 30px !important; /* 固定宽度确保居中 */
+  text-align: center !important;
+  color: #000 !important; /* 黑色 */
+  flex: 0 0 auto; /* 不拉伸，固定宽度 */
+}
+
+/* 4. 右侧文字：(需求信息)（稍靠右，绿色） */
+.form-tab[data-tab="recycler"] ul li.fir.spec .gai h1 span.right-text {
+  text-align: right !important;
+  margin-right: 10px !important; /* 离右边框的间距 */
+  color: seagreen !important; /* 单独绿色 */
+  flex: 1; /* 占右侧空间 */
+}
+
+/* 5. 下方小字：与左侧文字对齐，缩小间距 */
+.form-tab[data-tab="recycler"] ul li.fir.spec .gai p {
+  text-align: left !important;
+  margin-left: 10px !important; /* 与左侧文字左对齐 */
+  margin-top: 5px !important; /* 缩小与上方文字的间距 */
+  color: #000 !important; /* 黑色 */
+  font-size: small !important; /* 保持字体大小一致 */
+  width: 100% !important;
+  padding: 0 !important;
 }
